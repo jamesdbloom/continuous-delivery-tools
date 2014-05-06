@@ -37,6 +37,10 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
+# virutal machine files #
+#########################
+.vagrant
+
 # JetBrains config files #
 ##########################
 .idea
@@ -54,3 +58,12 @@ target
 ################################
 .gradle
 build
+out
+
+# grunt / node build artifacts #
+################################
+node_modules
+npm-debug.log
+tmp
+
+

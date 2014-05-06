@@ -1,0 +1,5 @@
+# box added from (see more boxes at http://www.vagrantbox.es/)
+vagrant box add fedora-20 https://dl.dropboxusercontent.com/u/15733306/vagrant/fedora-20-netinst-2014_01_05-minimal-puppet-guestadditions.box
+
+# to initialize
+vagrant init fedora-20
