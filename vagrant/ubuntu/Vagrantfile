@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  
+  config.vm.define "precise32" do |precise32|
+    precise32.vm.box = "precise32"
+    precise32.vm.provision :shell, :path => "bootstrap_build.sh"
+  end
+  
+end
+
