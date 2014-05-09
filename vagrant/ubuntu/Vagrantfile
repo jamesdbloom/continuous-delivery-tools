@@ -7,7 +7,9 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.define "precise32" do |precise32|
-    precise32.vm.box = "precise32"
+    precise32.vm.box = "misheska/ubuntu1204"
+    precise32.vm.box_url = "https://vagrantcloud.com/misheska/ubuntu1204/version/1/provider/virtualbox.box"
+    precise32.vm.synced_folder "~/git", "/host_git"
     precise32.vm.provision :shell, :path => "bootstrap_build.sh"
   end
   

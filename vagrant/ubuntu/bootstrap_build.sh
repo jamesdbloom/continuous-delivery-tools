@@ -4,8 +4,8 @@
 if [ ! -f /var/log/vmsetup ];
 then
 	# Point to an apt repo within our LAN to avoid hammering the public servers
-	sed -i 's/us\.archive\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/us.archive.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
-	sed -i 's/security\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/security.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
+	# sed -i 's/us\.archive\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/us.archive.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
+	# sed -i 's/security\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/security.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
 
 	# 1. Update packages
 	apt-get -y update
@@ -31,7 +31,7 @@ then
 	apt-get install -y oracle-java7-set-default
 	
 	# 3. Install Maven
-	apt-get install -y install maven
+	apt-get install -y maven
 
 	# 4. Install Debian Packing Tools
 	apt-get install -y lintian dput
