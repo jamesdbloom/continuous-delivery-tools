@@ -49,4 +49,7 @@ then
 	add-apt-repository --yes ppa:chris-lea/node.js
 	apt-get update
 	apt-get install -y nodejs
+
+	# 7. Install git
+	apt-get install -y git
 fi
