@@ -6,9 +6,11 @@ then
 	# Point to an apt repo within our LAN to avoid hammering the public servers
 	# sed -i 's/us\.archive\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/us.archive.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
 	# sed -i 's/security\.ubuntu\.com\/ubuntu/10.64.50.32:3142\/security.ubuntu.com\/ubuntu/g' /etc/apt/sources.list
-
-	# 1. Update packages
+	
+	# 1. Install latest git package
+	add-apt-repository ppa:git-core/ppa
 	apt-get -y update
+	apt-get install git
 	
 	# 2. Install Oracle Java 7
 
