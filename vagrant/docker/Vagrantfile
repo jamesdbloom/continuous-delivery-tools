@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+git_home = ENV['HOME'] + "/git"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # fix "stdin: is not a tty" error
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+  config.vm.box = "ubuntu-ansible"
+  config.vm.box_url = "file://~/git/ubuntu-vm/box/virtualbox/ubuntu1404-ansiblelatest.box"
+  config.vm.boot_timeout = 600
+
+  config.vm.define "docker" do |docker|
+    docker.vm.hostname = "docker"
+    docker.vm.network "private_network", ip: "192.168.10.10"
+    docker.vm.synced_folder "~", "/vagrant_home"
+    # ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant provisioning/playbook.yml
+    docker.vm.provision "ansible" do |ansible|
+      ansible.playbook = git_home + "/continuous-delivery-tools/vagrant/docker/provisioning/playbook.yml"
+      ansible.verbose = 'v'
+    end
+    docker.vm.provider :virtualbox do |vb|
+      vb.memory = 2048
+      vb.cpus = 3
+    end
+  end
+
+end

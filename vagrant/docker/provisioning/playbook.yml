@@ -1,0 +1,7 @@
+---
+# This playbook deploys docker
+
+- hosts: docker
+  sudo: true
+  roles:
+    - jamesdbloom.install-docker
