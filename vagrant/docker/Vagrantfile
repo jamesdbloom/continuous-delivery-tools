@@ -17,6 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "docker" do |docker|
     docker.vm.hostname = "docker"
     docker.vm.network "private_network", ip: "192.168.10.10"
+    docker.vm.network :forwarded_port, host: 5005, guest: 5005
     docker.vm.synced_folder "~", "/vagrant_home"
     # ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant provisioning/playbook.yml
     docker.vm.provision "ansible" do |ansible|
@@ -26,7 +27,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     docker.vm.provider :virtualbox do |vb|
       vb.memory = 2048
       vb.cpus = 3
+      vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller',  '--port', 0, '--device', 0, '--type', 'hdd', '--medium', '/Users/jamesdbloom/VirtualBox VMs/jamesdbloom_docker_1410764841272_4961/ubuntu1404-disk1.vmdk']
+      vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller',  '--port', 1, '--device', 1, '--type', 'hdd', '--medium', '/Volumes/Nifty/docker_hd.vdi'] 
     end
+  end
+
+  config.vm.define "test" do |test|
+    test.vm.hostname = "test"
+    test.vm.network "private_network", ip: "192.168.10.20"
+    test.vm.synced_folder "~", "/vagrant_home"
   end
 
 end
